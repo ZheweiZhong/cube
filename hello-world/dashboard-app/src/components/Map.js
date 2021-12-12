@@ -116,7 +116,7 @@ handleChange=(e)=> {
 
 
 export default GoogleApiWrapper({
-  apiKey: ("AIzaSyDd1tN_pSKfzCEQful4VOsg9f_sf0GmRjY")
+  apiKey: ("")
 })(MapContainer);
 
 
