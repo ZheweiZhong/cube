@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Divider, Drawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import MapIcon from '@material-ui/icons/Map';
+import DataUsageIcon from '@mui/icons-material/DataUsage';
 import { Profile, SidebarNav } from './components';
 import EvStationIcon from '@material-ui/icons/EvStation';
 import EvStationOutlinedIcon from '@material-ui/icons/EvStationOutlined';
@@ -57,6 +58,21 @@ const Sidebar = (props) => {
       href: '/dcstation',
       icon: <EvStationOutlinedIcon />,
     },
+    {
+      title: 'Usage Table',
+      href: '/usagetable',
+      icon: <DataUsageIcon />,
+    },
+    // {
+    //   title: 'Selection',
+    //   href: '/selection',
+    //   icon: <DataUsageIcon />,
+    // },
+    // {
+    //   title: 'Bar Chart',
+    //   href: '/barchart',
+    //   icon: <DataUsageIcon />,
+    // },
   ];
 
   return (

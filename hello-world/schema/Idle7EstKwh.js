@@ -1,4 +1,4 @@
-cube(`Idle7EstKwh`, {
+cube(`WeekMaintain`, {
   sql: `SELECT * FROM public.idle_7_est_kwh`,
   
   preAggregations: {
@@ -11,9 +11,9 @@ cube(`Idle7EstKwh`, {
   },
   
   measures: {
-    kwh: {
+    energy: {
       sql: `kwh`,
-      type: `avg`
+      type: `sum`
     }
   },
   

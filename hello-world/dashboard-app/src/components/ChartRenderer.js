@@ -25,6 +25,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+
 const CartesianChart = ({ resultSet, children, ChartComponent }) => (
   <ResponsiveContainer width="100%" height={350}>
     <ChartComponent data={resultSet.chartPivot()}>
@@ -38,7 +39,7 @@ const CartesianChart = ({ resultSet, children, ChartComponent }) => (
   </ResponsiveContainer>
 );
 
-const colors = ['#6930bf', '#ed3232', '#7A77FF'];
+const colors = ['#6930bf', '#ed3232', '#FAA025','#F585B9','#93FFED','#3BB6FA','#A3FFD5'];
 
 const stackedChartData = (resultSet) => {
   const data = resultSet
@@ -136,7 +137,7 @@ const TypeToChartComponent = {
   },
   table: ({ resultSet }) => {
     return (
-      <Table aria-label="simple table">
+      <Table aria-label="simple table" width={350} height={350}>
         <TableHead>
           <TableRow>
             {resultSet.tableColumns().map((c) => (

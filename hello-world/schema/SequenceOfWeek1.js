@@ -1,4 +1,4 @@
-cube(`SequenceOfWeek`, {
+cube(`SequenceOfWeek1`, {
   sql: `SELECT * FROM public.sequence_of_week`,
   
   preAggregations: {
@@ -7,20 +7,15 @@ cube(`SequenceOfWeek`, {
   },
   
   joins: {
-    WeekCharge: {
-      sql: `${CUBE}.day_of_week = ${WeekCharge}.day_of_week`,
+    WeekChargeHour: {
+      sql: `${CUBE}.day_of_week = ${WeekChargeHour}.day_of_week`,
       relationship: `hasOne`
     },
   },
-
   
   measures: {
-    // count: {
-    //   type: `count`,
-    //   drillMembers: [id]
-    // }
+
   },
-  
   dimensions: {
     id: {
       sql: `id`,

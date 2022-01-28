@@ -1,4 +1,4 @@
-cube(`Peak24EstKwh`, {
+cube(`DayCharge`, {
   sql: `SELECT * FROM public.peak24_est_kwh`,
   
   preAggregations: {
@@ -7,17 +7,17 @@ cube(`Peak24EstKwh`, {
   },
   
   joins: {
-    Idle24EstKwh: {
-      sql: `${CUBE}.id = ${Idle24EstKwh}.id`,
+    DayMaintain: {
+      sql: `${CUBE}.id = ${DayMaintain}.id`,
       relationship: `hasOne`
     },
     
   },
   
   measures: {
-    kwh: {
+    energy: {
       sql: `kwh`,
-      type: `avg`,
+      type: `sum`,
     }
   },
   

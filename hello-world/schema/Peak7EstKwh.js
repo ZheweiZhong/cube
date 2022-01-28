@@ -1,4 +1,4 @@
-cube(`Peak7EstKwh`, {
+cube(`WeekCharge`, {
   sql: `SELECT * FROM public.peak_7_est_kwh`,
   
   preAggregations: {
@@ -7,17 +7,17 @@ cube(`Peak7EstKwh`, {
   },
   
   joins: {
-    Idle7EstKwh: {
-      sql: `${CUBE}.id = ${Idle7EstKwh}.id`,
+    WeekMaintain: {
+      sql: `${CUBE}.id = ${WeekMaintain}.id`,
       relationship: `hasOne`
     },
 
   },
   
   measures: {
-    kwh: {
+    energy: {
       sql: `kwh`,
-      type: `avg`
+      type: `sum`
     }
   },
   

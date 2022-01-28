@@ -16,10 +16,12 @@ cube(`ChargingStations`, {
   },
   
   measures: {
-    count: {
-      type: `count`,
-      drillMembers: [city, country, leftPreviousUpdate, rightPreviousUpdate]
-    }
+    // count: {
+    //   type: `count`,
+    //   drillMembers: [city, country, leftPreviousUpdate, rightPreviousUpdate]
+    // }
+
+
   },  
   
   dimensions: {
@@ -165,7 +167,6 @@ cube(`ChargingStations`, {
     status1: {
       sql: `status_1`,
       type: `string`,
-      title: `Status 1`
     },
     
     oldLeft: {

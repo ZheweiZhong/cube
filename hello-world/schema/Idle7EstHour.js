@@ -1,4 +1,4 @@
-cube(`Idle7EstHour`, {
+cube(`WeekMaintainHour`, {
   sql: `SELECT * FROM public.idle_7_est_hour`,
   
   preAggregations: {
@@ -11,9 +11,9 @@ cube(`Idle7EstHour`, {
   },
   
   measures: {
-    hour_spent: {
+    spent: {
       sql: `hour_spent`,
-      type: `avg`
+      type: `sum`
     }
   },
   

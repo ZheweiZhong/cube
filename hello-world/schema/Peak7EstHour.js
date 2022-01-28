@@ -1,4 +1,4 @@
-cube(`Peak7EstHour`, {
+cube(`WeekChargeHour`, {
   sql: `SELECT * FROM public.peak_7_est_hour`,
   
   preAggregations: {
@@ -7,17 +7,17 @@ cube(`Peak7EstHour`, {
   },
   
   joins: {
-    Idle7EstHour: {
-      sql: `${CUBE}.id = ${Idle7EstHour}.id`,
+    WeekMaintainHour: {
+      sql: `${CUBE}.id = ${WeekMaintainHour}.id`,
       relationship: `hasOne`
     },
     
   },
   
   measures: {
-    hour_spent: {
+    spent: {
       sql: `hour_spent`,
-      type: `avg`
+      type: `sum`
     }
   },
   

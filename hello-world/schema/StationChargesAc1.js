@@ -1,4 +1,4 @@
-cube(`StationChargesAc`, {
+cube(`StationChargesAc1`, {
   sql: `SELECT * FROM public.station_charges_ac`,
   
   preAggregations: {
@@ -19,7 +19,10 @@ cube(`StationChargesAc`, {
     //   type: `count`,
     //   drillMembers: [modemId, idle7Est, userId, id, idle7EstKwh, rightSide, kwh24EstIdle]
     // }
-    
+    kWh: {
+      sql: `kwh`,
+      type: `sum`,
+    },
 
 
     idle7EstKwh: {
@@ -52,11 +55,6 @@ cube(`StationChargesAc`, {
       primaryKey: true,
       sql: `station_id`,
       type: `number`
-    },
-
-    kWh: {
-      sql: `kwh`,
-      type: `number`,
     },
 
     peak7EstKwh: {

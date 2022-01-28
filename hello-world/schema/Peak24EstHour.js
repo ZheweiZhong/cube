@@ -1,5 +1,5 @@
-cube(`DayMaintain`, {
-  sql: `SELECT * FROM public.idle24_est_kwh`,
+cube(`DayChargeHour`, {
+  sql: `SELECT * FROM public.peak_24_est_hour`,
   
   preAggregations: {
     // Pre-Aggregations definitions go here
@@ -7,13 +7,21 @@ cube(`DayMaintain`, {
   },
   
   joins: {
-    
+    DayMaintainHour: {
+      sql: `${CUBE}.id = ${DayMaintainHour}.id`,
+      relationship: `hasOne`
+    },
   },
   
   measures: {
-    energy: {
-      sql: `kwh`,
+    spent: {
+      sql: `hour_spent`,
       type: `sum`,
+    },
+    
+    value: {
+      sql: `value`,
+      type: `sum`
     }
   },
   
@@ -28,7 +36,7 @@ cube(`DayMaintain`, {
       sql: `hour_of_day`,
       type: `string`
     },
-
+    
     starttime: {
       sql: `starttime`,
       type: `time`
