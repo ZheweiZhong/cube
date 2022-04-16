@@ -9,7 +9,7 @@ cube(`StationChargesAc1`, {
   joins: {
     ChargingStation: {
       relationship: `belongsTo`, 
-      sql: `${CUBE}.station_id =${ChargingStation}.stationid`,
+      sql: `${CUBE}.station_id =${ChargingStation}.station_id`,
     },
     
   },

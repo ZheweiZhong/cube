@@ -1,43 +1,43 @@
-cube(`DayCharge`, {
-  sql: `SELECT * FROM public.peak24_est_kwh`,
+// cube(`DayCharge`, {
+//   sql: `SELECT * FROM public.peak24_est_kwh`,
   
-  preAggregations: {
-    // Pre-Aggregations definitions go here
-    // Learn more here: https://cube.dev/docs/caching/pre-aggregations/getting-started  
-  },
+//   preAggregations: {
+//     // Pre-Aggregations definitions go here
+//     // Learn more here: https://cube.dev/docs/caching/pre-aggregations/getting-started  
+//   },
   
-  joins: {
-    DayMaintain: {
-      sql: `${CUBE}.id = ${DayMaintain}.id`,
-      relationship: `hasOne`
-    },
+//   joins: {
+//     DayMaintain: {
+//       sql: `${CUBE}.id = ${DayMaintain}.id`,
+//       relationship: `hasOne`
+//     },
     
-  },
+//   },
   
-  measures: {
-    energy: {
-      sql: `kwh`,
-      type: `sum`,
-    }
-  },
+//   measures: {
+//     energy: {
+//       sql: `kwh`,
+//       type: `sum`,
+//     }
+//   },
   
-  dimensions: {
-    id: {
-      sql: `id`,
-      type: `number`,
-      primaryKey: true
-    },
+//   dimensions: {
+//     id: {
+//       sql: `id`,
+//       type: `number`,
+//       primaryKey: true
+//     },
     
-    hourOfDay: {
-      sql: `hour_of_day`,
-      type: `string`
-    },
+//     hourOfDay: {
+//       sql: `hour_of_day`,
+//       type: `string`
+//     },
 
-    starttime: {
-      sql: `starttime`,
-      type: `time`
-    }
-  },
+//     starttime: {
+//       sql: `starttime`,
+//       type: `time`
+//     }
+//   },
   
-  dataSource: `default`
-});
+//   dataSource: `default`
+// });

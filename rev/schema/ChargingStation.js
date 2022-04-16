@@ -1,5 +1,6 @@
 cube(`ChargingStation`, {
-  sql: `SELECT * FROM public.charging_station`,
+  sql: `SELECT station1 as station_id,organisation
+  FROM public.charging_stations`,
   
   preAggregations: {
     // Pre-Aggregations definitions go here
@@ -25,7 +26,7 @@ cube(`ChargingStation`, {
 
     stationid: {
       primaryKey: true,
-      sql: `stationid`,
+      sql: `station_id`,
       type: `number`,
     },
   },

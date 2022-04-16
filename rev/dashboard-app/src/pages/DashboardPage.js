@@ -5,69 +5,48 @@ import ChartRenderer from '../components/ChartRenderer';
 import Dashboard from '../components/Dashboard';
 import DashboardItem from '../components/DashboardItem';
 const DashboardItems = [
-  {
-    id: 1,
-    name: 'kWh Charging and Maintianing Charge by Day',
-    vizState: {
-      query: {
-        measures: ['WeekCharge.energy', 'WeekMaintain.energy'],
-        timeDimensions: [
-          {
-            dimension: 'WeekCharge.starttime',
-            dateRange: ['2012-07-01', '2012-07-31'],
-          },
-        ],
-        order: [['SequenceOfWeek.id', 'asc']],
-        limit: 5000,
-        filters: [],
-        dimensions: ['WeekCharge.dayOfWeek', 'SequenceOfWeek.id'],
-      },
-      chartType: 'bar',
-    },
-  }, // {
+  // {
   //   id: 1,
-  //   name: 'New Chart',
+  //   name: 'kWh Charging and Maintianing Charge by Day',
   //   vizState: {
   //     query: {
-  //       measures: ['Peak24EstKwh.kwh'],
+  //       measures: ['WeekCharge.energy', 'WeekMaintain.energy'],
   //       timeDimensions: [
   //         {
-  //           dimension: 'Peak24EstKwh.starttime',
+  //           dimension: 'WeekCharge.starttime',
   //           dateRange: ['2012-07-01', '2012-07-31'],
   //         },
   //       ],
-  //       order: {
-  //         'Peak24EstKwh.hourOfDay': 'asc',
-  //       },
+  //       order: [['SequenceOfWeek.id', 'asc']],
   //       limit: 5000,
   //       filters: [],
-  //       dimensions: ['Peak24EstKwh.hourOfDay'],
+  //       dimensions: ['WeekCharge.dayOfWeek', 'SequenceOfWeek.id'],
+  //     },
+  //     chartType: 'bar',
+  //   },
+  // },
+  // {
+  //   id: 2,
+  //   name: 'kWh Charging and Maintianing Charge by Hour',
+  //   vizState: {
+  //     query: {
+  //       measures: ['DayCharge.energy', 'DayMaintain.energy'],
+  //       timeDimensions: [
+  //         {
+  //           dimension: 'DayCharge.starttime',
+  //           dateRange: ['2012-07-01', '2012-07-31'],
+  //         },
+  //       ],
+  //       order: [['DayCharge.hourOfDay', 'asc']],
+  //       limit: 5000,
+  //       filters: [],
+  //       dimensions: ['DayCharge.hourOfDay'],
   //     },
   //     chartType: 'bar',
   //   },
   // },
   {
-    id: 2,
-    name: 'kWh Charging and Maintianing Charge by Hour',
-    vizState: {
-      query: {
-        measures: ['DayCharge.energy', 'DayMaintain.energy'],
-        timeDimensions: [
-          {
-            dimension: 'DayCharge.starttime',
-            dateRange: ['2012-07-01', '2012-07-31'],
-          },
-        ],
-        order: [['DayCharge.hourOfDay', 'asc']],
-        limit: 5000,
-        filters: [],
-        dimensions: ['DayCharge.hourOfDay'],
-      },
-      chartType: 'bar',
-    },
-  },
-  {
-    id: 3,
+    id: 1,
     name: 'Energy Supply by Stations',
     vizState: {
       query: {
@@ -87,119 +66,142 @@ const DashboardItems = [
       },
       chartType: 'pie',
     },
-  }, // {
-  //   id: 3,
-  //   name: 'kWh Charging and Maintianing Charge by Day',
+  }, 
+  {
+    id: 2,
+    name: 'Period Energy',
+    vizState: {
+      query: {
+        measures: ['PeriodEnergy.energy'],
+        timeDimensions: [
+          {
+            dimension: 'PeriodEnergy.starttime',
+            dateRange: ['2012-07-01', '2012-07-31'],
+          },
+        ],
+        order: {
+          'PeriodEnergy.energy': 'desc',
+        },
+        dimensions: ['PeriodEnergy.period'],
+      },
+      chartType: 'pie',
+    },
+  },
+  // {
+  //   id: 4,
+  //   name: 'Hours Charging and Maintianing Charge by Hour',
   //   vizState: {
   //     query: {
-  //       measures: ['WeekCharge.energy', 'WeekMaintain.energy'],
+  //       measures: ['WeekMaintainHour.spent', 'WeekChargeHour.spent'],
   //       timeDimensions: [
   //         {
-  //           dimension: 'WeekCharge.starttime',
+  //           dimension: 'WeekMaintainHour.starttime',
   //           dateRange: ['2012-07-01', '2012-07-31'],
   //         },
   //       ],
-  //       order: [['WeekCharge.dayOfWeek', 'asc']],
+  //       order: [['SequenceOfWeek1.id', 'asc']],
   //       limit: 5000,
   //       filters: [],
-  //       dimensions: ['WeekCharge.dayOfWeek'],
+  //       dimensions: ['WeekChargeHour.dayOfWeek', 'SequenceOfWeek1.id'],
+  //     },
+  //     chartType: 'bar',
+  //   },
+  // },
+  // {
+  //   id: 2,
+  //   name: 'Period Energy',
+  //   vizState: {
+  //     query: {
+  //       measures: ['PeriodKwh.energy'],
+  //       timeDimensions: [
+  //         {
+  //           dimension: 'PeriodKwh.starttime',
+  //           dateRange: ['2012-07-01', '2012-07-31'],
+  //         },
+  //       ],
+  //       order: {
+  //         'PeriodKwh.energy': 'desc',
+  //       },
+  //       dimensions: ['PeriodKwh.period'],
+  //     },
+  //     chartType: 'pie',
+  //   },
+  // }, // {
+  //   id: 6,
+  //   name: 'Hours Charging and Maintianing Charge by Day',
+  //   vizState: {
+  //     query: {
+  //       measures: ['DayChargeHour.spent', 'DayMaintainHour.spent'],
+  //       timeDimensions: [
+  //         {
+  //           dimension: 'DayChargeHour.starttime',
+  //           dateRange: ['2012-07-01', '2012-07-31'],
+  //         },
+  //       ],
+  //       order: [['DayChargeHour.hourOfDay', 'asc']],
+  //       dimensions: ['DayChargeHour.hourOfDay'],
   //     },
   //     chartType: 'bar',
   //   },
   // },
   {
-    id: 4,
-    name: 'Hours Charging and Maintianing Charge by Hour',
+    id: 3,
+    name: 'kWh Charging and Maintianing Charge by Day ',
     vizState: {
       query: {
-        measures: ['WeekMaintainHour.spent', 'WeekChargeHour.spent'],
+        measures: ['WeekCharge.energy', 'WeekMaintain.energy'],
         timeDimensions: [
           {
-            dimension: 'WeekMaintainHour.starttime',
+            dimension: 'WeekCharge.starttime',
             dateRange: ['2012-07-01', '2012-07-31'],
           },
         ],
-        order: [['SequenceOfWeek1.id', 'asc']],
-        limit: 5000,
+        order: [['WeekCharge.day_number', 'asc']],
         filters: [],
-        dimensions: ['WeekChargeHour.dayOfWeek', 'SequenceOfWeek1.id'],
+        dimensions: ['WeekCharge.day_of_week', 'WeekCharge.day_number'],
       },
       chartType: 'bar',
     },
   },
-   // {
-  //   id: 6,
-  //   name: 'New Chart',
-  //   vizState: {
-  //     query: {
-  //       measures: [],
-  //       timeDimensions: [],
-  //       order: {
-  //         'UsageTable.estimatedCost22c': 'asc',
-  //       },
-  //       limit: 5000,
-  //       filters: [],
-  //       dimensions: [
-  //         'UsageTable.estimatedCost22c',
-  //         'UsageTable.estimatedCostPso',
-  //         'UsageTable.numberOfTransactions',
-  //         'UsageTable.powerUsedInPeak',
-  //         'UsageTable.powerUsedInShoulder',
-  //         'UsageTable.powerUsedInOffPeak',
-  //         'UsageTable.percentageTimeInUse',
-  //       ],
-  //     },
-  //     chartType: 'table',
-  //   },
-  // },
-  // {
-  //   id: 7,
-  //   name: 'New Chart',
-  //   vizState: {
-  //     query: {
-  //       measures: [],
-  //       timeDimensions: [],
-  //       order: {
-  //         'UsageTable.estimatedCost22c': 'asc',
-  //       },
-  //       limit: 5000,
-  //       filters: [],
-  //       dimensions: [
-  //         'UsageTable.pluggedInTime',
-  //         'UsageTable.chargingTime',
-  //         'UsageTable.maintainingChargeTime',
-  //         'UsageTable.averageTransactionTime',
-  //         'UsageTable.averageChargingTransactionTime',
-  //         'UsageTable.averageMaintainingChargeTransactionTime',
-  //         'UsageTable.percentageTimeInUse',
-  //       ],
-  //     },
-  //     chartType: 'table',
-  //   },
-  // },
   {
-    id: 8,
-    name: 'Period Energy',
+    id: 4,
+    name: 'Hours Charging and Maintianing Charge by Hour',
     vizState: {
       query: {
-        measures: ['PeriodKwh.energy'],
+        measures: ['WeekChargeHour.hours', 'WeekMaintainHour.hours'],
         timeDimensions: [
           {
-            dimension: 'PeriodKwh.starttime',
+            dimension: 'WeekChargeHour.starttime',
             dateRange: ['2012-07-01', '2012-07-31'],
           },
         ],
-        order: {
-          'PeriodKwh.energy': 'desc',
-        },
-        dimensions: ['PeriodKwh.period'],
+        order: [['WeekChargeHour.day_number', 'asc']],
+        dimensions: ['WeekChargeHour.day_of_week', 'WeekChargeHour.day_number'],
       },
-      chartType: 'pie',
+      chartType: 'bar',
+    },
+  },
+  {
+    id: 5,
+    name: 'kWh Charging and Maintianing Charge by Hour',
+    vizState: {
+      query: {
+        measures: ['DayCharge.energy', 'DayMaintain.energy'],
+        timeDimensions: [
+          {
+            dimension: 'DayCharge.starttime',
+            dateRange: ['2012-07-01', '2012-07-31'],
+          },
+        ],
+        order: [['DayCharge.hour', 'asc']],
+        dimensions: ['DayCharge.hour'],
+      },
+      chartType: 'bar',
     },
   },
   {
     id: 6,
-    name: 'Hours Charging and Maintianing Charge by Day',
+    name: 'kWh Charging and Maintianing Charge by Day',
     vizState: {
       query: {
         measures: ['DayChargeHour.spent', 'DayMaintainHour.spent'],
@@ -209,8 +211,8 @@ const DashboardItems = [
             dateRange: ['2012-07-01', '2012-07-31'],
           },
         ],
-        order: [['DayChargeHour.hourOfDay', 'asc']],
-        dimensions: ['DayChargeHour.hourOfDay'],
+        order: [['DayChargeHour.hour_on', 'asc']],
+        dimensions: ['DayChargeHour.hour_on'],
       },
       chartType: 'bar',
     },
