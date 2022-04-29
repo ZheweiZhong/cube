@@ -6,7 +6,7 @@ const Dashboard = ({ children }) => (
     container
     spacing={3}
     style={{
-      padding: 24,
+      padding: 24
     }}
     justify="space-around"
     alignItems="flex-start"

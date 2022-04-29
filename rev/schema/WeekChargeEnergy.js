@@ -2,7 +2,7 @@ cube(`WeekCharge`, {
   sql: `SELECT
   (peak_7_est_kwh[1] + peak_7_est_kwh[2] + peak_7_est_kwh[3]+ peak_7_est_kwh[4]+ peak_7_est_kwh[5]
   + peak_7_est_kwh[6]+ peak_7_est_kwh[7]) as kwh,EXTRACT(DOW FROM starttime)as day_number,
-  to_char(starttime, 'Day') AS day_of_week,starttime,id
+  to_char(starttime, 'Day') AS day_of_week,starttime,id,station_id
 FROM station_charges_ac`,
 
   
@@ -30,6 +30,10 @@ FROM station_charges_ac`,
   },
   
   dimensions: {
+    stationId: {
+      sql: `station_id`,
+      type: `number`
+    },
     day_number: {
       sql: `day_number`,
       type: `number`,

@@ -69,7 +69,7 @@ const TableComponent = props => {
   const tableHeaders = [
     { text: "ID", value: "StationChargesAc.id" },
     { text: "Station Id", value: "StationChargesAc.stationId" },
-    { text: "Right Side", value: "StationChargesAc.rightSide" },
+    { text: "Side", value: "StationChargesAc.side" },
     { text: "User Id", value: "StationChargesAc.userId" },   
     { text: "kWh", value: "StationChargesAc.kWh" },
     { text: "Start Time", value: "StationChargesAc.starttime" },
@@ -145,7 +145,7 @@ const TableComponent = props => {
                         {obj["StationChargesAc.stationId"]}
                       </TableCell>
                       <TableCell>
-                        {obj["StationChargesAc.rightSide"]}
+                        {obj["StationChargesAc.side"]}
                       </TableCell>
                       <TableCell>
                         {obj["StationChargesAc.userId"]}

@@ -1,75 +1,75 @@
 cube(`DayMaintainHour`, {
   sql: `
-  SELECT (time_24[1]/3600-peak_24_est[1]/3600) as hours, starttime, '00:00' as hour_on,id
+  SELECT (time_24[1]/3600-peak_24_est[1]/3600) as hours, starttime, '00:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[2]/3600-peak_24_est[2]/3600) as hours, starttime, '01:00' as hour_on,id
+  SELECT (time_24[2]/3600-peak_24_est[2]/3600) as hours, starttime, '01:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[3]/3600-peak_24_est[3]/3600) as hours, starttime, '02:00' as hour_on,id
+  SELECT (time_24[3]/3600-peak_24_est[3]/3600) as hours, starttime, '02:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[4]/3600-peak_24_est[4]/3600) as hours, starttime, '03:00' as hour_on,id
+  SELECT (time_24[4]/3600-peak_24_est[4]/3600) as hours, starttime, '03:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[5]/3600-peak_24_est[5]/3600) as hours, starttime, '04:00' as hour_on,id
+  SELECT (time_24[5]/3600-peak_24_est[5]/3600) as hours, starttime, '04:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[6]/3600-peak_24_est[6]/3600)as hours, starttime, '05:00' as hour_on,id
+  SELECT (time_24[6]/3600-peak_24_est[6]/3600)as hours, starttime, '05:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[7]/3600-peak_24_est[7]/3600) as hours, starttime, '06:00' as hour_on,id
+  SELECT (time_24[7]/3600-peak_24_est[7]/3600) as hours, starttime, '06:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[8]/3600-peak_24_est[8]/3600) as hours, starttime, '07:00' as hour_on,id
+  SELECT (time_24[8]/3600-peak_24_est[8]/3600) as hours, starttime, '07:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[9]/3600-peak_24_est[9]/3600) as hours, starttime, '08:00' as hour_on,id
+  SELECT (time_24[9]/3600-peak_24_est[9]/3600) as hours, starttime, '08:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[10]/3600-peak_24_est[10]/3600) as hours, starttime, '09:00' as hour_on,id
+  SELECT (time_24[10]/3600-peak_24_est[10]/3600) as hours, starttime, '09:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[11]/3600-peak_24_est[11]/3600) as hours, starttime, '10:00' as hour_on,id
+  SELECT (time_24[11]/3600-peak_24_est[11]/3600) as hours, starttime, '10:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[12]/3600-peak_24_est[12]/3600) as hours, starttime, '11:00' as hour_on,id
+  SELECT (time_24[12]/3600-peak_24_est[12]/3600) as hours, starttime, '11:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[13]/3600-peak_24_est[13]/3600) as hours, starttime, '12:00' as hour_on,id
+  SELECT (time_24[13]/3600-peak_24_est[13]/3600) as hours, starttime, '12:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[14]/3600-peak_24_est[14]/3600) as hours, starttime, '13:00' as hour_on,id
+  SELECT (time_24[14]/3600-peak_24_est[14]/3600) as hours, starttime, '13:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[15]/3600-peak_24_est[15]/3600) as hours, starttime, '14:00' as hour_on,id
+  SELECT (time_24[15]/3600-peak_24_est[15]/3600) as hours, starttime, '14:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[16]/3600-peak_24_est[16]/3600) as hours, starttime, '15:00' as hour_on,id
+  SELECT (time_24[16]/3600-peak_24_est[16]/3600) as hours, starttime, '15:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[17]/3600-peak_24_est[17]/3600) as hours, starttime, '16:00' as hour_on,id
+  SELECT (time_24[17]/3600-peak_24_est[17]/3600) as hours, starttime, '16:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[18]/3600-peak_24_est[18]/3600) as hours, starttime, '17:00' as hour_on,id
+  SELECT (time_24[18]/3600-peak_24_est[18]/3600) as hours, starttime, '17:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[19]/3600-peak_24_est[19]/3600) as hours, starttime, '18:00' as hour_on,id
+  SELECT (time_24[19]/3600-peak_24_est[19]/3600) as hours, starttime, '18:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[20]/3600-peak_24_est[20]/3600) as hours, starttime, '19:00' as hour_on,id
+  SELECT (time_24[20]/3600-peak_24_est[20]/3600) as hours, starttime, '19:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[21]/3600-peak_24_est[21]/3600) as hours, starttime, '20:00' as hour_on,id
+  SELECT (time_24[21]/3600-peak_24_est[21]/3600) as hours, starttime, '20:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[22]/3600-peak_24_est[22]/3600) as hours, starttime, '21:00' as hour_on,id
+  SELECT (time_24[22]/3600-peak_24_est[22]/3600) as hours, starttime, '21:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[23]/3600-peak_24_est[23]/3600) as hours, starttime, '22:00' as hour_on,id
+  SELECT (time_24[23]/3600-peak_24_est[23]/3600) as hours, starttime, '22:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT (time_24[24]/3600-peak_24_est[24]/3600) as hours, starttime, '23:00' as hour_on,id
+  SELECT (time_24[24]/3600-peak_24_est[24]/3600) as hours, starttime, '23:00' as hour_on,id,station_id
   FROM station_charges_ac order by hour_on`,
 
   
@@ -91,6 +91,10 @@ cube(`DayMaintainHour`, {
   },
   
   dimensions: {
+    stationId: {
+      sql: `station_id`,
+      type: `number`
+    },
     hour_on: {
       sql: `hour_on`,
       type: `string`,

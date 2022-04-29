@@ -82,16 +82,25 @@ const Toolbar = props => {
 
   const classes = useStyles();
 
+  const handleDateChange = (date) =>
+  this.setState({
+    startDate:{Date:date}
+  });
+  const handleDateChangeFinish = (date) =>
+  this.setState({
+    finishDate:{Date:date}
+  });
+
   const handleChangeTab = (e, value) => {
     setTabValue(value);
     setStatusFilter(value);
   };
-  const handleDateChange = (date) => {
-    setStartDate(date);
-  };
-  const handleDateChangeFinish = (date) => {
-    setFinishDate(date);
-  };
+  // const handleDateChange = (date) => {
+  //   setStartDate(date);
+  // };
+  // const handleDateChangeFinish = (date) => {
+  //   setFinishDate(date);
+  // };
 
   return (
     <div

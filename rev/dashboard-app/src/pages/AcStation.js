@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
 
 const AcStation = () => {
   const classes = useStyles();
-  const tabs = ['All','true', 'false'];
+  const tabs = ['All','left','right'];
   const [statusFilter, setStatusFilter] = React.useState(0);
   const [startDate, setStartDate] = React.useState(new Date("2012-05-10T00:00:00"));
   const [finishDate, setFinishDate] = React.useState(new Date("2012-06-10T00:00:00"));
@@ -27,7 +27,7 @@ const AcStation = () => {
     dimensions: [
       'StationChargesAc.id',
       'StationChargesAc.stationId',
-      'StationChargesAc.rightSide',
+      'StationChargesAc.side',
       'StationChargesAc.userId',
       'StationChargesAc.kWh',
       'StationChargesAc.starttime',
@@ -37,7 +37,7 @@ const AcStation = () => {
     ],
         "filters": [
             {
-              "dimension": "StationChargesAc.rightSide",
+              "dimension": "StationChargesAc.side",
               "operator": tabs[statusFilter] !== 'All' ? "equals" : "set",
               "values": [
                 `${tabs[statusFilter].toLowerCase()}`

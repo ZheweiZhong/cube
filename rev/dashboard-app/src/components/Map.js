@@ -2,17 +2,6 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper,google} from 'google-maps-reac
 import React,{Component,useState} from 'react';
 import { useCubeQuery } from '@cubejs-client/react';
 
-const style = {
-  width: '50%',
-  height: '70%',
-  position: "relative",
-};
-
-const style2 = {
-    rightt:'30%',
-    position: "absolute",
-  };
-
 
 class MapContainer extends Component {
   constructor(props) {
@@ -122,9 +111,7 @@ handleChange=(e)=> {
 }
 
 
-export default GoogleApiWrapper({
-  apiKey: ("")
-})(MapContainer);
+export default GoogleApiWrapper({apiKey: ("")})(MapContainer);
 
 
 

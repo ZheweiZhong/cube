@@ -1,5 +1,7 @@
 cube(`StationChargesAc`, {
-  sql: `SELECT * FROM public.station_charges_ac`,
+  sql: `select  'right'as side,* from station_charges_ac where right_side=true
+  union all
+  select  'left'as side,* from station_charges_ac where right_side=false order by starttime`,
   
   preAggregations: {
     // Pre-Aggregations definitions go here
@@ -19,10 +21,7 @@ cube(`StationChargesAc`, {
     //   type: `count`,
     //   drillMembers: [modemId, idle7Est, userId, id, idle7EstKwh, rightSide, kwh24EstIdle]
     // }
-    kWh: {
-      sql: `kwh`,
-      type: `sum`,
-    },
+
 
 
     idle7EstKwh: {
@@ -50,7 +49,14 @@ cube(`StationChargesAc`, {
       sql: `id`,
       type: `number`,
     },
-
+    side: {
+      sql: `side`,
+      type: `string`,
+    },
+    kWh: {
+      sql: `kwh`,
+      type: `number`,
+    },
     stationId: {
       primaryKey: true,
       sql: `station_id`,

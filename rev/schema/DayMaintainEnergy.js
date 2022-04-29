@@ -1,75 +1,75 @@
 cube(`DayMaintain`, {
   sql: `
-  SELECT kwh_24_est_idle[1] as kwh, starttime, '00:00' as hour_on,id
+  SELECT kwh_24_est_idle[1] as kwh, starttime, '00:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[2] as kwh, starttime, '01:00' as hour_on,id
+  SELECT kwh_24_est_idle[2] as kwh, starttime, '01:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[3] as kwh, starttime, '02:00' as hour_on,id
+  SELECT kwh_24_est_idle[3] as kwh, starttime, '02:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[4] as kwh, starttime, '03:00' as hour_on,id
+  SELECT kwh_24_est_idle[4] as kwh, starttime, '03:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[5] as kwh, starttime, '04:00' as hour_on,id
+  SELECT kwh_24_est_idle[5] as kwh, starttime, '04:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[6] as kwh, starttime, '05:00' as hour_on,id
+  SELECT kwh_24_est_idle[6] as kwh, starttime, '05:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[7] as kwh, starttime, '06:00' as hour_on,id
+  SELECT kwh_24_est_idle[7] as kwh, starttime, '06:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[8] as kwh, starttime, '07:00' as hour_on,id
+  SELECT kwh_24_est_idle[8] as kwh, starttime, '07:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[9] as kwh, starttime, '08:00' as hour_on,id
+  SELECT kwh_24_est_idle[9] as kwh, starttime, '08:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[10] as kwh, starttime, '09:00' as hour_on,id
+  SELECT kwh_24_est_idle[10] as kwh, starttime, '09:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[11] as kwh, starttime, '10:00' as hour_on,id
+  SELECT kwh_24_est_idle[11] as kwh, starttime, '10:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[12] as kwh, starttime, '11:00' as hour_on,id
+  SELECT kwh_24_est_idle[12] as kwh, starttime, '11:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[13] as kwh, starttime, '12:00' as hour_on,id
+  SELECT kwh_24_est_idle[13] as kwh, starttime, '12:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[14] as kwh, starttime, '13:00' as hour_on,id
+  SELECT kwh_24_est_idle[14] as kwh, starttime, '13:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[15] as kwh, starttime, '14:00' as hour_on,id
+  SELECT kwh_24_est_idle[15] as kwh, starttime, '14:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[16] as kwh, starttime, '15:00' as hour_on,id
+  SELECT kwh_24_est_idle[16] as kwh, starttime, '15:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[17] as kwh, starttime, '16:00' as hour_on,id
+  SELECT kwh_24_est_idle[17] as kwh, starttime, '16:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[18] as kwh, starttime, '17:00' as hour_on,id
+  SELECT kwh_24_est_idle[18] as kwh, starttime, '17:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[19] as kwh, starttime, '18:00' as hour_on,id
+  SELECT kwh_24_est_idle[19] as kwh, starttime, '18:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[20] as kwh, starttime, '19:00' as hour_on,id
+  SELECT kwh_24_est_idle[20] as kwh, starttime, '19:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[21] as kwh, starttime, '20:00' as hour_on,id
+  SELECT kwh_24_est_idle[21] as kwh, starttime, '20:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[22] as kwh, starttime, '21:00' as hour_on,id
+  SELECT kwh_24_est_idle[22] as kwh, starttime, '21:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[23] as kwh, starttime, '22:00' as hour_on,id
+  SELECT kwh_24_est_idle[23] as kwh, starttime, '22:00' as hour_on,id,station_id
   FROM station_charges_ac
   UNION ALL
-  SELECT kwh_24_est_idle[24] as kwh, starttime, '23:00' as hour_on,id
+  SELECT kwh_24_est_idle[24] as kwh, starttime, '23:00' as hour_on,id,station_id
   FROM station_charges_ac order by hour_on`,
 
   
@@ -78,12 +78,6 @@ cube(`DayMaintain`, {
     // Learn more here: https://cube.dev/docs/caching/pre-aggregations/getting-started  
   },
   
-  // joins: {
-  //   WeekMaintain: {
-  //     sql: `${CUBE}.id = ${WeekMaintain}.id`,
-  //     relationship: `hasOne`
-  //   },
-  // },
   
   measures: {
     energy: {
@@ -97,6 +91,10 @@ cube(`DayMaintain`, {
   },
   
   dimensions: {
+    stationId: {
+      sql: `station_id`,
+      type: `number`
+    },
     hour: {
       sql: `hour_on`,
       type: `string`,

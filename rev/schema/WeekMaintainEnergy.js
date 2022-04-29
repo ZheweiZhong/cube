@@ -2,7 +2,7 @@ cube(`WeekMaintain`, {
   sql: `SELECT
   (idle_7_est_kwh[1] + idle_7_est_kwh[2] + idle_7_est_kwh[3]+ idle_7_est_kwh[4]+ idle_7_est_kwh[5]
   + idle_7_est_kwh[6]+ idle_7_est_kwh[7]) as kwh,EXTRACT(DOW FROM starttime)as day_number,
-  to_char(starttime, 'Day') AS day_of_week,starttime,id
+  to_char(starttime, 'Day') AS day_of_week,starttime,id,station_id
 FROM station_charges_ac`,
 
   
@@ -12,7 +12,6 @@ FROM station_charges_ac`,
   },
   
   joins: {
-    
   },
   
   measures: {
@@ -27,6 +26,11 @@ FROM station_charges_ac`,
   },
   
   dimensions: {
+    stationId: {
+      sql: `station_id`,
+      type: `number`
+    },
+
     day_number: {
       sql: `day_number`,
       type: `number`,

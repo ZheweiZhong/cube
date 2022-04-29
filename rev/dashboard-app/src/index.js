@@ -18,7 +18,7 @@ ReactDOM.render(
          <Redirect exact from="/" to="/dashboard"/>
          <Route key="index" exact path="/dashboard" component={DashboardPage} />
          <Route key="map" path="/maps">
-           <Map />
+           <Map />  
          </Route>
          <Route key="ac" path="/acstation" component={AcStation} />
          <Route key="dc" path="/dcstation" component={DcStation} />

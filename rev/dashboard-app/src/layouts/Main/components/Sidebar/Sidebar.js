@@ -63,16 +63,6 @@ const Sidebar = (props) => {
       href: '/usagetable',
       icon: <DataUsageIcon />,
     },
-    // {
-    //   title: 'Selection',
-    //   href: '/selection',
-    //   icon: <DataUsageIcon />,
-    // },
-    // {
-    //   title: 'Bar Chart',
-    //   href: '/barchart',
-    //   icon: <DataUsageIcon />,
-    // },
   ];
 
   return (
