@@ -96,6 +96,7 @@ class MapContainer extends Component {
         address:'',
         left:'273',
         right:'274',
+        operation:'set'
       },
 
         showingInfoWindow: true,
@@ -130,7 +131,7 @@ class MapContainer extends Component {
     // console.log("AfterChange",e.target.value);
     // console.log(arr);
     // console.log(typeof(e.target.value));
-    this.setState({mapCenter:{id:arr[0],lat:arr[1],lng:arr[2],value:arr[3],address:arr[4],left:arr[5],right:arr[6]}});
+    this.setState({mapCenter:{id:arr[0],lat:arr[1],lng:arr[2],value:arr[3],address:arr[4],left:arr[5],right:arr[6],operation:arr[7]}});
     console.log(this.state.mapCenter);
   }
   
@@ -154,21 +155,23 @@ class MapContainer extends Component {
         }));
         const query = {
           measures:[
-            "Usage.plug_in_time",
-            "Usage.charge_time",
-            "Usage.maintain_time",
-            "Usage.power_peak",
-            "Usage.power_off_peak"
+            "UsageTime.plug_in_time",
+            "UsageTime.charge_time",
+            "UsageTime.maintain_time",
+            "UsagePeak.peak",
+          ],
+          dimensions:[
+            
           ],
           timeDimensions: [
             {
-              dimension: 'Usage.starttime',
+              dimension: 'UsageTime.starttime',
               dateRange: [this.state.startDate.Date, this.state.finishDate.Date],
             },
           ],
           filters: [    {
-            "member": "Usage.stationId",
-            "operator": 'equals',
+            "member": "UsageTime.stationId",
+            "operator": this.state.mapCenter.operation,
             "values": [this.state.mapCenter.left,this.state.mapCenter.right]
           }],
           
@@ -177,16 +180,16 @@ class MapContainer extends Component {
           ],
         };
         const parks =[
-          {id:'1',latitude:-31.980773,longtitude:115.816244,value:"UWA REV Lab",address:"UWA EE3.11 WA 6009",left:'273',right:'274'},
-          {id:'2',latitude:-32.130416,longtitude:115.853805,value:"City of Cockburn",address:"25 Wentworth Pde WA 6164",left:'271',right:'272'},
-          {id:'3',latitude:-31.912302,longtitude:115.811447,value:"West Australian dual charging station",address:"50 Hasler Road WA 6017",left:'307',right:'308'},
-          {id:'4',latitude:-31.943921,longtitude:115.876775,value:"Department of Transport",address:"East Perth Train Station -  Summers Street (West) WA 6003",left:'269',right:'270'},
-          {id:'5',latitude:-31.977548,longtitude:115.816322,value:"UWA Computer Science",address:"Fairway - Entry No. 4 WA 6009",left:'313',right:'314'},
-          {id:'6',latitude:-31.949506,longtitude:115.823085,value:"Subiaco",address:"78 Rowland Street WA 6008",left:'275',right:'276'},
-          {id:'7',latitude:-31.956628,longtitude:115.877066,value:"Mainroads WA",address:"Don Aitken Centre - Waterloo Crescent WA 6004",left:'309',right:'310'},
-          {id:'8',latitude:-32.06949,longtitude:115.841147,value:"Murdoch University CREST",address:"Murdoch Drive WA 6150",left:'267',right:'268'},
-          {id:'9',latitude:-31.869875,longtitude:116.016412,value:"City of Swan",address:"City of Swan Depot - Bishop Road WA 6056",left:'311',right:'312'},
-          {id:'10',latitude:-31.869875,longtitude:116.016412,value:"All stations",address:"",left:'311',right:'312'},
+          {id:'1',latitude:-31.980773,longtitude:115.816244,value:"UWA REV Lab",address:"UWA EE3.11 WA 6009",left:'273',right:'274',operation:'equals'},
+          {id:'2',latitude:-32.130416,longtitude:115.853805,value:"City of Cockburn",address:"25 Wentworth Pde WA 6164",left:'271',right:'272',operation:'equals'},
+          {id:'3',latitude:-31.912302,longtitude:115.811447,value:"West Australian dual charging station",address:"50 Hasler Road WA 6017",left:'307',right:'308',operation:'equals'},
+          {id:'4',latitude:-31.943921,longtitude:115.876775,value:"Department of Transport",address:"East Perth Train Station -  Summers Street (West) WA 6003",left:'269',right:'270',operation:'equals'},
+          {id:'5',latitude:-31.977548,longtitude:115.816322,value:"UWA Computer Science",address:"Fairway - Entry No. 4 WA 6009",left:'313',right:'314',operation:'equals'},
+          {id:'6',latitude:-31.949506,longtitude:115.823085,value:"Subiaco",address:"78 Rowland Street WA 6008",left:'275',right:'276',operation:'equals'},
+          {id:'7',latitude:-31.956628,longtitude:115.877066,value:"Mainroads WA",address:"Don Aitken Centre - Waterloo Crescent WA 6004",left:'309',right:'310',operation:'equals'},
+          {id:'8',latitude:-32.06949,longtitude:115.841147,value:"Murdoch University CREST",address:"Murdoch Drive WA 6150",left:'267',right:'268',operation:'equals'},
+          {id:'9',latitude:-31.869875,longtitude:116.016412,value:"City of Swan",address:"City of Swan Depot - Bishop Road WA 6056",left:'311',right:'312',operation:'equals'},
+          {id:'10',latitude:-31.869875,longtitude:116.016412,value:"All stations",address:"",left:'',right:'',operation:'set'},
           ];
         const DashboardItems = [
           {
@@ -227,7 +230,7 @@ class MapContainer extends Component {
                 },
                 filters: [    {
                   "member": "PeriodEnergy.stationId",
-                  "operator": 'equals',
+                  "operator": this.state.mapCenter.operation,
                   "values": [this.state.mapCenter.left,this.state.mapCenter.right]
                 },
                 // {and:[
@@ -258,7 +261,7 @@ class MapContainer extends Component {
                 order: [['WeekCharge.day_number', 'asc']],
                 filters: [    {
                   "member": "WeekCharge.stationId",
-                  "operator": "equals",
+                  "operator":this.state.mapCenter.operation,
                   "values": [this.state.mapCenter.left,this.state.mapCenter.right]
                 },
                 // {and:[
@@ -289,7 +292,7 @@ class MapContainer extends Component {
                 order: [['WeekChargeHour.day_number', 'asc']],
                 filters: [    {
                   "member": "WeekChargeHour.stationId",
-                  "operator": "equals",
+                  "operator":this.state.mapCenter.operation,
                   "values": [this.state.mapCenter.left,this.state.mapCenter.right]
                 },
                 // {and:[
@@ -320,7 +323,7 @@ class MapContainer extends Component {
                 order: [['DayCharge.hour', 'asc']],
                 filters: [    {
                   "member": "DayCharge.stationId",
-                  "operator": "equals",
+                  "operator": this.state.mapCenter.operation,
                   "values": [this.state.mapCenter.left,this.state.mapCenter.right]
                 },
                 // {and:[
@@ -351,7 +354,7 @@ class MapContainer extends Component {
                 order: [['DayChargeHour.hour_on', 'asc']],
                 filters: [    {
                   "member": "DayChargeHour.stationId",
-                  "operator": "equals",
+                  "operator": this.state.mapCenter.operation,
                   "values": [this.state.mapCenter.left,this.state.mapCenter.right]
                 },
                 // {and:[
@@ -470,7 +473,7 @@ class MapContainer extends Component {
                     <input type="radio" 
                       key={option.id} 
                       checked={this.state.mapCenter.id === option.id} 
-                      value={[option.id,option.latitude,option.longtitude,option.value,option.address,option.left,option.right]}
+                      value={[option.id,option.latitude,option.longtitude,option.value,option.address,option.left,option.right,option.operation]}
                        />
                     <label style={{ font: '18px Arial',padding:'10px'}}>{option.value}</label>
                   </div>))}

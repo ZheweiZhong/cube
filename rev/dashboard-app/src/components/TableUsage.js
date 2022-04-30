@@ -86,11 +86,11 @@ const TableComponent = props => {
   const [page, setPage] = useState(0);
 
   const tableHeaders = [
-    { text: "Plug in time", value: "Usage.plug_in_time" },
-    { text: "Charge time", value: "Usage.charge_time" },
-    { text: "Maintian time", value: "Usage.maintain_time" },
-    { text: "Power Peak", value: "Usage.power_peak" },
-    { text: "Power off peak", value: "Usage.power_off_peak" },
+    { text: "Plug in time", value: "UsageTime.plug_in_time" },
+    { text: "Charge time", value: "UsageTime.charge_time" },
+    { text: "Maintian time", value: "UsageTime.maintain_time" },
+    { text: "Power Peak", value: "UsageEnergy.peak" },
+
 
   ];
   const { resultSet, error, isLoading } = useCubeQuery(query, { cubejsApi });
@@ -154,26 +154,26 @@ const TableComponent = props => {
                       // key={obj["Usage.plug_in_time"]}
                     >
                       <TableCell>
-                        {secondsToDhms(obj["Usage.plug_in_time"])}
+                        {secondsToDhms(obj["UsageTime.plug_in_time"])}
                       </TableCell>
                       <TableCell>
-                        {secondsToDhms(obj["Usage.charge_time"])}
+                        {secondsToDhms(obj["UsageTime.charge_time"])}
                       </TableCell>
                       {/* <TableCell>
                         {"$"+obj["UsageTable.estimatedCostPso"]}
                       </TableCell> */}
                       <TableCell>
-                        {secondsToDhms(obj["Usage.maintain_time"])}
+                        {secondsToDhms(obj["UsageTime.maintain_time"])}
                       </TableCell>
                       {/* <TableCell>
                       {moment(obj["UsageTable.pluggedInTime"]).format("D HH:mm:ss")}
                       </TableCell> */}
                       <TableCell>
-                        {decimalPlace(obj["Usage.power_peak"])+"kWh"}
+                        {decimalPlace(obj["UsagePeak.peak"])+"kWh"}
                       </TableCell>
-                      <TableCell>
-                        {decimalPlace(obj["Usage.power_off_peak"])+"kWh"}
-                      </TableCell>
+                      {/* <TableCell>
+                        {obj["UsageEnergy.period"]}
+                      </TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>
