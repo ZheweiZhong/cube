@@ -158,7 +158,8 @@ class MapContainer extends Component {
             "UsageTime.plug_in_time",
             "UsageTime.charge_time",
             "UsageTime.maintain_time",
-            "UsagePeak.peak",
+            "UsageEnergy.peak",
+            "UsageEnergy.offpeak",
           ],
           dimensions:[
             

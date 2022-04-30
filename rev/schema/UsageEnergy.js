@@ -1,11 +1,12 @@
 cube(`UsageEnergy`, {
   sql: `select 
-    peak, starttime,station_id,id,'peak'as period
-   from ${UsagePeak.sql()}as a
+  kwh as energy, starttime,station_id,id,'peak'as period
+   from station_charges_ac where (extract (hour from starttime)>=7 and extract (hour from starttime)<=21)
    union all
    select 
-   offpeak, starttime, station_id,id,'offpeak'as period
-   from ${UsageOffPeak.sql()}as b`,
+  kwh as energy, starttime,station_id,id,'offpeak'as period
+   from station_charges_ac where (extract (hour from starttime)<7 or extract (hour from starttime)>21)
+   `,
   
   preAggregations: {
     // Pre-Aggregations definitions go here
@@ -21,7 +22,6 @@ cube(`UsageEnergy`, {
       relationship: `hasOne`, 
       sql: `${CUBE}.id =${UsageTime}.id`,
     },
-
   },
   
   measures: {
@@ -42,13 +42,19 @@ cube(`UsageEnergy`, {
     //   type: `sum`,
     // },
     peak: {
-      sql: `peak`,
+      sql: `energy`,
       type: `sum`,
+      filters: [{ sql: `${CUBE}.period = 'peak'` }],
     },
     offpeak: {
-      sql: `offpeak`,
+      sql: `energy`,
       type: `sum`,
+      filters: [{ sql: `${CUBE}.period = 'offpeak'` }],
     },
+    // power_off_peak: {
+    //   sql: `power_off_peak`,
+    //   type: `sum`,
+    // },
 
 
     idle7EstKwh: {
@@ -72,10 +78,10 @@ cube(`UsageEnergy`, {
   },
   
   dimensions: {
-    period: {
-      sql: `period`,
-      type: `string`,
-    },
+    // period: {
+    //   sql: `period`,
+    //   type: `string`,
+    // },
     id: {
       sql: `id`,
       type: `number`,

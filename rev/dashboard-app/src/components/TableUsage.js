@@ -90,6 +90,7 @@ const TableComponent = props => {
     { text: "Charge time", value: "UsageTime.charge_time" },
     { text: "Maintian time", value: "UsageTime.maintain_time" },
     { text: "Power Peak", value: "UsageEnergy.peak" },
+    { text: "Power Off Peak", value: "UsageEnergy.offpeak" },
 
 
   ];
@@ -169,11 +170,12 @@ const TableComponent = props => {
                       {moment(obj["UsageTable.pluggedInTime"]).format("D HH:mm:ss")}
                       </TableCell> */}
                       <TableCell>
-                        {decimalPlace(obj["UsagePeak.peak"])+"kWh"}
+                        {decimalPlace(obj["UsageEnergy.peak"])+"kWh"}
                       </TableCell>
-                      {/* <TableCell>
-                        {obj["UsageEnergy.period"]}
-                      </TableCell> */}
+                      <TableCell>
+                        {decimalPlace(obj["UsageEnergy.offpeak"])+"kWh"}
+                      </TableCell>
+
                     </TableRow>
                   ))}
                 </TableBody>
