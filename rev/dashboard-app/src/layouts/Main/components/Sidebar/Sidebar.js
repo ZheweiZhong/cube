@@ -43,11 +43,11 @@ const Sidebar = (props) => {
       href: '/dashboard',
       icon: <DashboardIcon />,
     },
-    {
-      title: 'Maps',
-      href: '/maps',
-      icon: <MapIcon />,
-    },
+    // {
+    //   title: 'Maps',
+    //   href: '/maps',
+    //   icon: <MapIcon />,
+    // },
     {
       title: 'AC-station',
       href: '/acstation',
@@ -58,11 +58,11 @@ const Sidebar = (props) => {
       href: '/dcstation',
       icon: <EvStationOutlinedIcon />,
     },
-    {
-      title: 'Usage Table',
-      href: '/usagetable',
-      icon: <DataUsageIcon />,
-    },
+    // {
+    //   title: 'Usage Table',
+    //   href: '/usagetable',
+    //   icon: <DataUsageIcon />,
+    // },
   ];
 
   return (

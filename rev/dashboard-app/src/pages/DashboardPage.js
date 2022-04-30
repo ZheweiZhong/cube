@@ -82,10 +82,10 @@ class MapContainer extends Component {
       this.state = {
 
         startDate:{
-          Date:"2012-07-01T00:00:00",
+          Date:"2013-07-01T00:00:00",
         },
         finishDate:{
-          Date:"2013-07-01T00:00:00",
+          Date:"2014-07-01T00:00:00",
         },
         
         mapCenter:{
@@ -94,8 +94,8 @@ class MapContainer extends Component {
         lng: 115.816244,
         value:'',
         address:'',
-        left:'273',
-        right:'274',
+        left:'',
+        right:'',
         operation:'set'
       },
 
