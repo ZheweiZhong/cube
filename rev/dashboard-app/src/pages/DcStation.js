@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import Table from "../components/Table.js";
-import Toolbar from "../components/Toolbar.js";
+import Table from "../components/DcStationTable.js";
+import Toolbar from "../components/DcToolbar.js";
 const useStyles = makeStyles(theme => ({
   root: { padding: 15 },
   content: { marginTop: 15 },

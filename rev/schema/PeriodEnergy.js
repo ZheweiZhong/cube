@@ -1,11 +1,11 @@
 cube(`PeriodEnergy`, {
   sql: `SELECT
   kwh, starttime, 'off_peak' as period,station_id
-  FROM station_charges_ac where (extract (hour from starttime)<7 or extract (hour from starttime)>21)
+  FROM station_charges_ac where (extract (hour from starttime)<8 or extract (hour from starttime)>22)
   union all
   SELECT
   kwh, starttime, 'peak' as period,station_id
-  FROM station_charges_ac where (extract (hour from starttime)>=7 and extract (hour from starttime)<=21)
+  FROM station_charges_ac where (extract (hour from starttime)>=8 and extract (hour from starttime)<=22)
   order by starttime `,
 
   

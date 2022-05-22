@@ -91,8 +91,9 @@ const TableComponent = props => {
     { text: "Maintian time", value: "UsageTime.maintain_time" },
     { text: "Power Peak", value: "UsageEnergy.peak" },
     { text: "Power Off Peak", value: "UsageEnergy.offpeak" },
-
-
+    { text: "Estimated Cost Peak", value: "UsageEnergy.estimatedCostPeak" },
+    { text: "Estimated Cost Off Peak", value: "UsageEnergy.estimatedCostPeakOffPeak" },
+    { text: "Estimated Cost", value: "" },
   ];
   const { resultSet, error, isLoading } = useCubeQuery(query, { cubejsApi });
   if (isLoading) {
@@ -175,7 +176,15 @@ const TableComponent = props => {
                       <TableCell>
                         {decimalPlace(obj["UsageEnergy.offpeak"])+"kWh"}
                       </TableCell>
-
+                      <TableCell>
+                        {"$"+decimalPlace(obj["UsageEnergy.estimatedCostPeak"])}
+                      </TableCell>
+                      <TableCell>
+                        {"$"+decimalPlace(obj["UsageEnergy.estimatedCostOffPeak"])}
+                      </TableCell>
+                      <TableCell>
+                        {"$"+decimalPlace(obj["UsageEnergy.estimatedCostPeak"]+obj["UsageEnergy.estimatedCostOffPeak"])}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

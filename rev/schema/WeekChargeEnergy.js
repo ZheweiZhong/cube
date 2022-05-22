@@ -7,8 +7,6 @@ FROM station_charges_ac`,
 
   
   preAggregations: {
-    // Pre-Aggregations definitions go here
-    // Learn more here: https://cube.dev/docs/caching/pre-aggregations/getting-started  
   },
   
   joins: {
@@ -23,10 +21,6 @@ FROM station_charges_ac`,
       sql: `kwh`,
       type: `sum`
     },
-    // count: {
-    //   type: `count`,
-    //   drillMembers: [id, kwh24EstIdle, idleKwh, rightSide, userId, idle7Est, modemId]
-    // }
   },
   
   dimensions: {
@@ -34,16 +28,15 @@ FROM station_charges_ac`,
       sql: `station_id`,
       type: `number`
     },
+    day_of_week: {
+      sql: `day_of_week`,
+      type: `string`,
+    },
     day_number: {
       sql: `day_number`,
       type: `number`,
       shown:false,
     },
-    day_of_week: {
-      sql: `day_of_week`,
-      type: `string`,
-    },
-
     id: {
       sql: `id`,
       type: `number`,

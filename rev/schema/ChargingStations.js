@@ -1,5 +1,10 @@
 cube(`ChargingStations`, {
-  sql: `SELECT * FROM public.charging_stations`,
+  sql: `select 'equals'as operation, station_id,latitude,longtitude,organisation,address,
+  station1,station2,status_1,status_2,total_kwh_1,total_kwh_2, servertime_1 from charging_stations
+  union all
+  select 'set'as operation, 1 as station_id, -31.980773 as latitude,115.816244 as longtitude, 'All stations' as organisation, 
+  null as address, null as station1, null as station2, null as status_1, null as status_2, 
+  null as total_kwh_1, null as total_kwh_2 , servertime_1 from charging_stations where station_id=736`,
   
   preAggregations: {
     // Pre-Aggregations definitions go here
@@ -18,31 +23,40 @@ cube(`ChargingStations`, {
   },
   
   dimensions: {
+    operation: {
+      sql: `operation`,
+      type: `string`,
+    },
+    station_id: {
+      sql: `station_id`,
+      type: `number`,
+    },
     organisation: {
       sql: `organisation`,
+      type: `string`
+    },
+        
+    address: {
+      sql: `address`,
       type: `string`,
     },
-    
-    status1: {
-      sql: `status_1`,
-      type: `string`,
-      title: `Status 1`
+    station1: {
+      sql: `station1`,
+      type: `number`,
     },
-    
-    status2: {
-      sql: `status_2`,
-      type: `string`,
-      title: `Status 2`
+    station2: {
+      sql: `station2`,
+      type: `number`,
     },
 
     latitude: {
       sql: `latitude`,
-      type: `string`
+      type: `number`
     },
     
     longtitude: {
       sql: `longtitude`,
-      type: `string`
+      type: `number`
     },
     
     installed1: {
@@ -71,14 +85,12 @@ cube(`ChargingStations`, {
     
     totalKwh1: {
       sql: `total_kwh_1`,
-      type: `string`,
-      title: `Total Kwh 1`
+      type: `number`,
     },
     
     totalKwh2: {
       sql: `total_kwh_2`,
-      type: `string`,
-      title: `Total Kwh 2`
+      type: `number`,
     },
     
     leftInstalled: {
@@ -106,14 +118,8 @@ cube(`ChargingStations`, {
       type: `string`
     },
     
-   
     funder: {
       sql: `funder`,
-      type: `string`
-    },
-    
-    address: {
-      sql: `address`,
       type: `string`
     },
     
@@ -145,6 +151,18 @@ cube(`ChargingStations`, {
     phone: {
       sql: `phone`,
       type: `string`
+    },
+    
+    status1: {
+      sql: `status_1`,
+      type: `string`,
+      title: `Status 1`
+    },
+    
+    status2: {
+      sql: `status_2`,
+      type: `string`,
+      title: `Status 2`
     },
     
     user1: {

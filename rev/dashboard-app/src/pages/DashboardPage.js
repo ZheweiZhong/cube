@@ -4,12 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import ChartRenderer from '../components/ChartRenderer';
 import Dashboard from '../components/Dashboard';
 import DashboardItem from '../components/DashboardItem';
-import Toolbar from "../components/Toolbar.js";
 import {Map, InfoWindow, Marker, GoogleApiWrapper,google} from 'google-maps-react';
 import {Component,useState} from 'react';
 import Card from '@material-ui/core/Card';
-import PropTypes from 'prop-types';
-import CardContent from '@material-ui/core/CardContent';
 import { useCubeQuery } from '@cubejs-client/react';
 import { makeStyles } from "@material-ui/styles";
 import Table from "../components/TableUsage.js";
@@ -22,6 +19,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
    MuiPickersUtilsProvider,
    KeyboardDatePicker
  } from "@material-ui/pickers";
+
  const AntTabs = withStyles({
   indicator: {},
 })(Tabs);
@@ -89,14 +87,18 @@ class MapContainer extends Component {
         },
         
         mapCenter:{
-        id:'',
-        lat: -31.980773,
-        lng: 115.816244,
+        id:"1385",
+        lat: "-31.980773",
+        lng: "115.816244",
         value:'',
         address:'',
-        left:'',
-        right:'',
-        operation:'set'
+        left:"273",
+        right:"274",
+        status1:'',
+        status2:'',
+        kwh1:'',
+        kwh2:'',
+        operation:'set',
       },
 
         showingInfoWindow: true,
@@ -128,27 +130,68 @@ class MapContainer extends Component {
   
   handleChange=(e)=> {
     let arr=e.target.value.split(',');
-    // console.log("AfterChange",e.target.value);
-    // console.log(arr);
-    // console.log(typeof(e.target.value));
-    this.setState({mapCenter:{id:arr[0],lat:arr[1],lng:arr[2],value:arr[3],address:arr[4],left:arr[5],right:arr[6],operation:arr[7]}});
+    this.setState({mapCenter:{id:arr[0],lat:arr[1],lng:arr[2],value:arr[3],address:arr[4],left:arr[5],
+      right:arr[6],status1:arr[7],status2:arr[8],kwh1:arr[9],kwh2:arr[10],operation:arr[11]}});
     console.log(this.state.mapCenter);
   }
   
     render() {
-        // const [startDate, setStartDate] = React.useState(new Date("2012-07-01T00:00:00"));
-        // const [finishDate, setFinishDate] = React.useState(new Date("2012-07-31T00:00:00"));
-        // const query = {
-        //   timeDimensions: [
-        //   ],
-        //       order: {
-        //         },
-        //   dimensions: [
-        //     'ChargingStations.status1',
-        //     'ChargingStations.status2',
-        //     'ChargingStations.organisation'
-        //   ],
-        // };
+      console.log(this.state.mapCenter);
+      const RadioForm=()=> {
+        const { resultSet, isLoading, error, progress } = useCubeQuery({
+          measures: ['ChargingStations.count'],
+          dimensions:[
+            'ChargingStations.station_id',
+            'ChargingStations.latitude',
+            'ChargingStations.longtitude',
+            'ChargingStations.organisation',
+            'ChargingStations.address',
+            'ChargingStations.station1',
+            'ChargingStations.station2',
+            'ChargingStations.status1',
+            'ChargingStations.status2',
+            'ChargingStations.totalKwh1',
+            'ChargingStations.totalKwh2',
+            'ChargingStations.operation',
+          ],
+          timeDimensions: [
+            {
+              dimension: 'ChargingStations.servertime1',
+              dateRange: ["2012-04-04T00:00:00", "2012-04-06T00:00:00"],
+            },
+          ],
+        });
+        if (isLoading) {
+          return <div>{progress?.stage || 'Loading...'}</div>;
+        }
+        if (error) {
+          return <div>{error.toString()}</div>;
+        }
+        if (!resultSet) {
+          return null;
+        }
+      const dataSource= resultSet.series().map((a) => { 
+      return  <form value={this.state.mapCenter} onChange={this.handleChange}
+      style={{left:'70%',position:'absolute'}}>
+      {a.series.map((option) => {
+         let arr=option.x.split(",");
+         let newarr=[Number(arr[0]),Number(arr[1]),Number(arr[2]),arr[3],arr[4],Number(arr[5]),Number(arr[6]),
+         arr[7],arr[8],Number(arr[9]),Number(arr[10]),arr[11]]
+         let obj=Object.assign({},newarr)
+     return <div >
+        <input type="radio" 
+          key={obj[0]} 
+          checked={this.state.mapCenter.value === obj[3]} 
+          value={[obj[0],obj[1],obj[2],obj[3],obj[4],obj[5],obj[6],obj[7],obj[8],obj[9],obj[10],obj[11]]}
+           />
+        <label style={{ font: '18px Arial',padding:'10px'}}>{obj[3]}</label>
+      </div>})}
+      </form>
+      });
+        return dataSource
+          
+    }
+
         const useStyles = makeStyles(theme => ({
           root: { padding: 15 },
           content: { marginTop: 15 },
@@ -160,6 +203,8 @@ class MapContainer extends Component {
             "UsageTime.maintain_time",
             "UsageEnergy.peak",
             "UsageEnergy.offpeak",
+            "UsageEnergy.estimatedCostPeak",
+            "UsageEnergy.estimatedCostOffPeak",
           ],
           dimensions:[
             
@@ -180,22 +225,10 @@ class MapContainer extends Component {
 
           ],
         };
-        const parks =[
-          {id:'1',latitude:-31.980773,longtitude:115.816244,value:"UWA REV Lab",address:"UWA EE3.11 WA 6009",left:'273',right:'274',operation:'equals'},
-          {id:'2',latitude:-32.130416,longtitude:115.853805,value:"City of Cockburn",address:"25 Wentworth Pde WA 6164",left:'271',right:'272',operation:'equals'},
-          {id:'3',latitude:-31.912302,longtitude:115.811447,value:"West Australian dual charging station",address:"50 Hasler Road WA 6017",left:'307',right:'308',operation:'equals'},
-          {id:'4',latitude:-31.943921,longtitude:115.876775,value:"Department of Transport",address:"East Perth Train Station -  Summers Street (West) WA 6003",left:'269',right:'270',operation:'equals'},
-          {id:'5',latitude:-31.977548,longtitude:115.816322,value:"UWA Computer Science",address:"Fairway - Entry No. 4 WA 6009",left:'313',right:'314',operation:'equals'},
-          {id:'6',latitude:-31.949506,longtitude:115.823085,value:"Subiaco",address:"78 Rowland Street WA 6008",left:'275',right:'276',operation:'equals'},
-          {id:'7',latitude:-31.956628,longtitude:115.877066,value:"Mainroads WA",address:"Don Aitken Centre - Waterloo Crescent WA 6004",left:'309',right:'310',operation:'equals'},
-          {id:'8',latitude:-32.06949,longtitude:115.841147,value:"Murdoch University CREST",address:"Murdoch Drive WA 6150",left:'267',right:'268',operation:'equals'},
-          {id:'9',latitude:-31.869875,longtitude:116.016412,value:"City of Swan",address:"City of Swan Depot - Bishop Road WA 6056",left:'311',right:'312',operation:'equals'},
-          {id:'10',latitude:-31.869875,longtitude:116.016412,value:"All stations",address:"",left:'',right:'',operation:'set'},
-          ];
         const DashboardItems = [
           {
             id: 1,
-            name: 'Energy Supply by Stations',
+            name: 'Energy Supply by Stations (/kWh)',
             vizState: {
               query: {
                 measures: ['StationChargesAc1.kWh'],
@@ -216,7 +249,7 @@ class MapContainer extends Component {
           }, 
           {
             id: 2,
-            name: 'Period Energy',
+            name: 'Period Energy (/kWh)',
             vizState: {
               query: {
                 measures: ['PeriodEnergy.energy'],
@@ -249,7 +282,7 @@ class MapContainer extends Component {
           },
           {
             id: 3,
-            name: 'kWh Charging and Maintianing Charge by Week ',
+            name: 'Energy Charging and Maintianing Charge by Week (/kWh)',
             vizState: {
               query: {
                 measures: ['WeekCharge.energy', 'WeekMaintain.energy'],
@@ -280,7 +313,7 @@ class MapContainer extends Component {
           },
           {
             id: 4,
-            name: 'Hours Charging and Maintianing Charge by Week',
+            name: 'Time Charging and Maintianing Charge by Week (/h)',
             vizState: {
               query: {
                 measures: ['WeekChargeHour.hours', 'WeekMaintainHour.hours'],
@@ -311,7 +344,7 @@ class MapContainer extends Component {
           },
           {
             id: 5,
-            name: 'kWh Charging and Maintianing Charge by Hour',
+            name: 'Energy Charging and Maintianing Charge by Hour (/kWh)',
             vizState: {
               query: {
                 measures: ['DayCharge.energy', 'DayMaintain.energy'],
@@ -342,7 +375,7 @@ class MapContainer extends Component {
           },
           {
             id: 6,
-            name: 'kWh Charging and Maintianing Charge by Day',
+            name: 'Time Charging and Maintianing Charge by Day (/h)',
             vizState: {
               query: {
                 measures: ['DayChargeHour.spent', 'DayMaintainHour.spent'],
@@ -355,7 +388,7 @@ class MapContainer extends Component {
                 order: [['DayChargeHour.hour_on', 'asc']],
                 filters: [    {
                   "member": "DayChargeHour.stationId",
-                  "operator": this.state.mapCenter.operation,
+                  "operator":this.state.mapCenter.operation,
                   "values": [this.state.mapCenter.left,this.state.mapCenter.right]
                 },
                 // {and:[
@@ -456,29 +489,14 @@ class MapContainer extends Component {
           </MuiPickersUtilsProvider>
         </Grid>
       </Grid>
-    </div>
-            {/* <Toolbar
-             startDate={this.state.startDate.Date}
-             finishDate={this.state.finishDate.Date}
-            /> */}
-                <Table query={query}/>
+          </div>
+            <Table query={query}/>
             <Dashboard>
               {DashboardItems.map(dashboardItem)}
             </Dashboard> 
           </div> 
           <Card>
-            <form value={this.state.mapCenter} onChange={this.handleChange}
-                  style={{left:'70%',position:'absolute'}}>
-                  {parks.map((option) => (
-                  <div >
-                    <input type="radio" 
-                      key={option.id} 
-                      checked={this.state.mapCenter.id === option.id} 
-                      value={[option.id,option.latitude,option.longtitude,option.value,option.address,option.left,option.right,option.operation]}
-                       />
-                    <label style={{ font: '18px Arial',padding:'10px'}}>{option.value}</label>
-                  </div>))}
-             </form>
+          <RadioForm/>
           </Card>
           <Card style={{width:'50%',height:'70%',position:'absolute'}}> 
           <Map 
@@ -499,24 +517,24 @@ class MapContainer extends Component {
                  lat: this.state.mapCenter.lat,
                  lng: this.state.mapCenter.lng
                  }}
-              />
+                
+              >
+              </Marker>
               <InfoWindow
                  marker={this.state.activeMarker}
-                 visible={this.state.showingInfoWindow}>
-                 <div>
-                    <h1>{this.state.mapCenter.value}</h1>
-                    <h2>Left charger status:Not in use</h2>
-                    <h2>Right charger status:In use</h2>
-                    <h2>Left KW = 0kW</h2>
-                    <h2>Right KW = 0kW</h2>
-                    <h2>Address:{this.state.mapCenter.address}</h2>
-                 </div>
+                 visible={this.state.showingInfoWindow}
+                 >
+                   <div>
+                   <h1>{this.state.mapCenter.value}</h1>
+                   <h2>Address: {this.state.mapCenter.address}</h2>
+                   <h3>Left Charger Status: {this.state.mapCenter.status1}</h3>
+                   <h3>Right Charger Status: {this.state.mapCenter.status2}</h3>
+                   <h3>Left Energy Used: {this.state.mapCenter.kwh1} kWh</h3>
+                   <h3>Right Energy Used: {this.state.mapCenter.kwh2} kWh</h3>
+                   </div>
               </InfoWindow>
            </Map>
             </Card> 
-          {/* <div id='googleMaps'
-          style={{width:'50%',height:'70%',position:'absolute'}}> */}
-
            </div>
           ) : (
           <Empty />

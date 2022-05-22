@@ -67,21 +67,16 @@ const TableComponent = props => {
   const [page, setPage] = useState(0);
 
   const tableHeaders = [
-    { text: "Estimated Cost 22c", value: "UsageTable.estimatedCost22c" },
-    { text: "Estimated Cost Peak-shoulder-offpeak", value: "UsageTable.estimatedCostPso" },
-    { text: "Number Of Transactions", value: "UsageTable.numberOfTransactions" },
-    { text: "Plugged In Time", value: "UsageTable.pluggedInTime" },
-    { text: "Charging Time", value: "UsageTable.chargingTime" },
-    { text: "Maintaining Charge Time", value: "UsageTable.maintainingChargeTime" },
-    { text: "Average Transaction Time", value: "UsageTable.averageTransactionTime" },
-    { text: "Average Charging Transaction Time", value: "UsageTable.averageChargingTransactionTime" },
-    { text: "Average Maintaining Charge Transaction Time", value: "UsageTable.averageMaintainingChargeTransactionTime" },
-    { text: "Percentage Time In Use", value: "UsageTable.percentageTimeInUse" },
-    { text: "Power Used In Peak", value: "UsageTable.powerUsedInPeak" },
-    { text: "Power Used In Shoulder", value: "UsageTable.powerUsedInShoulder" },
-    { text: "Power Used In Off Peak", value: "UsageTable.powerUsedInOffPeak" },
-
-
+    { text: "ID", value: "StationChargesAc.id" },
+    { text: "Station Id", value: "StationChargesAc.stationId" },
+    { text: "Side", value: "StationChargesAc.side" },
+    { text: "User Id", value: "StationChargesAc.userId" },   
+    { text: "kWh", value: "StationChargesAc.kWh" },
+    { text: "Start Time", value: "StationChargesAc.starttime" },
+    { text: "End Time", value: "StationChargesAc.endtime" },
+    { text: "Charge Energy", value: "StationChargesAc.peakkwh" },
+    { text: "Maintaining Charge Energy", value: "StationChargesAc.idlekwh" },
+    { text: "Date", value: "StationChargesAc.starttime" },
   ];
   const { resultSet, error, isLoading } = useCubeQuery(query, { cubejsApi });
   if (isLoading) {
@@ -124,14 +119,14 @@ const TableComponent = props => {
                        className={classes.hoverable}           
                       >
                         <span>{item.text}</span>
-                        {/* <Typography
+                        <Typography
                           className={classes.arrow}
                           variant="body2"
                           component="span"
                         >
                           {(sorting[0] === item.value) ? (sorting[1] === "desc" ? <KeyboardArrowUpIcon/> :
                             <KeyboardArrowDownIcon/>) : null}
-                        </Typography> */}
+                        </Typography>
                       </TableCell>
                     ))}
                   </TableRow>
@@ -141,46 +136,37 @@ const TableComponent = props => {
                     <TableRow
                       className={classes.tableRow}
                       hover
-                      key={obj["UsageTable.estimatedCost22c"]}
+                      key={obj["StationChargesAc.id"]}
                     >
                       <TableCell>
-                        {"$"+obj["UsageTable.estimatedCost22c"]}
+                        {obj["StationChargesAc.id"]}
                       </TableCell>
                       <TableCell>
-                        {"$"+obj["UsageTable.estimatedCostPso"]}
+                        {obj["StationChargesAc.stationId"]}
                       </TableCell>
                       <TableCell>
-                        {obj["UsageTable.numberOfTransactions"]}
+                        {obj["StationChargesAc.side"]}
                       </TableCell>
                       <TableCell>
-                      {moment(obj["UsageTable.pluggedInTime"]).format("D HH:mm:ss")}
+                        {obj["StationChargesAc.userId"]}
                       </TableCell>
                       <TableCell>
-                      {moment(obj["UsageTable.chargingTime"]).format("D HH:mm:ss")}
+                        {obj["StationChargesAc.kWh"]}
                       </TableCell>
                       <TableCell>
-                      {moment(obj["UsageTable.maintainingChargeTime"]).format("D HH:mm:ss")}
+                       {moment(obj["StationChargesAc.starttime"]).format("YYYY-MM-DD HH:mm:ss")}
                       </TableCell>
                       <TableCell>
-                      {moment(obj["UsageTable.averageTransactionTime"]).format("HH:mm:ss")}
+                       {moment(obj["StationChargesAc.endtime"]).format("YYYY-MM-DD HH:mm:ss")}
                       </TableCell>
                       <TableCell>
-                      {moment(obj["UsageTable.averageChargingTransactionTime"]).format("HH:mm:ss")}
+                        {obj["StationChargesAc.peakkwh"]}
                       </TableCell>
                       <TableCell>
-                      {moment(obj["UsageTable.averageMaintainingChargeTransactionTime"]).format("HH:mm:ss")}
+                        {obj["StationChargesAc.idlekwh"]}
                       </TableCell>
                       <TableCell>
-                        {obj["UsageTable.percentageTimeInUse"]+"%"}
-                      </TableCell>
-                      <TableCell>
-                        {obj["UsageTable.powerUsedInPeak"]}
-                      </TableCell>
-                      <TableCell>
-                        {obj["UsageTable.powerUsedInShoulder"]}
-                      </TableCell>
-                      <TableCell>
-                        {obj["UsageTable.powerUsedInOffPeak"]}
+                        {moment(obj["StationChargesAc.starttime"]).format("DD/MM/YYYY")}
                       </TableCell>
                     </TableRow>
                   ))}

@@ -1,5 +1,8 @@
 cube(`ChargingStation`, {
   sql: `SELECT station1 as station_id,organisation
+  FROM public.charging_stations
+  union all
+  SELECT station2 as station_id,organisation
   FROM public.charging_stations`,
   
   preAggregations: {
@@ -30,6 +33,7 @@ cube(`ChargingStation`, {
       type: `number`,
     },
   },
+
   
   dataSource: `default`
 });

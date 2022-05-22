@@ -38,9 +38,8 @@ const CartesianChart = ({ resultSet, children, ChartComponent }) => (
     </ChartComponent>
   </ResponsiveContainer>
 );
-
-const colors = ['#6930bf', '#ed3232', '#FAA025','#F585B9','#93FFED','#3BB6FA','#A3FFD5'];
-
+const colors = ['#6930bf', '#ed3232', '#FAA025','#F585B9','#93FFED','#3BB6FA','#A3FFD5','#76b5c5','#00cccc'
+,'#d580ff','#f08237','#00aaff'];
 const stackedChartData = (resultSet) => {
   const data = resultSet
     .pivot()

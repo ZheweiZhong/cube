@@ -74,10 +74,14 @@ cube(`DayChargeHour`, {
 
   
   preAggregations: {
-    // Pre-Aggregations definitions go here
-    // Learn more here: https://cube.dev/docs/caching/pre-aggregations/getting-started  
+    // amountByCreated: {
+    //   type: `rollup`,
+    //   measures: [CUBE.spent],
+    //   dimensions: [CUBE.hour_on],
+    //   timeDimension:CUBE.starttime,
+    //   granularity: `day`
+    // }
   },
-  
   joins: {
     DayMaintainHour: {
       sql: `${CUBE}.id = ${DayMaintainHour}.id`,

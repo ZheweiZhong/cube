@@ -1,11 +1,11 @@
 cube(`UsageEnergy`, {
   sql: `select 
   kwh as energy, starttime,station_id,id,'peak'as period
-   from station_charges_ac where (extract (hour from starttime)>=7 and extract (hour from starttime)<=21)
+   from station_charges_ac where (extract (hour from starttime)>=8 and extract (hour from starttime)<=22)
    union all
    select 
   kwh as energy, starttime,station_id,id,'offpeak'as period
-   from station_charges_ac where (extract (hour from starttime)<7 or extract (hour from starttime)>21)
+   from station_charges_ac where (extract (hour from starttime)<8 or extract (hour from starttime)>22)
    `,
   
   preAggregations: {
@@ -48,6 +48,16 @@ cube(`UsageEnergy`, {
     },
     offpeak: {
       sql: `energy`,
+      type: `sum`,
+      filters: [{ sql: `${CUBE}.period = 'offpeak'` }],
+    },
+    estimatedCostPeak: {
+      sql: `${CUBE}.energy * 0.38`,
+      type: `sum`,
+      filters: [{ sql: `${CUBE}.period = 'peak'` }],
+    },
+    estimatedCostOffPeak: {
+      sql: `${CUBE}.energy * 0.114`,
       type: `sum`,
       filters: [{ sql: `${CUBE}.period = 'offpeak'` }],
     },
